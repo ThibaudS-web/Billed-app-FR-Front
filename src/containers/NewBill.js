@@ -24,6 +24,10 @@ export default class NewBill {
     const email = JSON.parse(localStorage.getItem("user")).email
     formData.append('file', file)
     formData.append('email', email)
+    const fileExtension = fileName.split('.').pop().toLowerCase()
+
+    // Exit when file extension is not valid
+    if (!this.isExtensionAvailable(fileExtension)) return 0
 
     this.store
       .bills()
@@ -57,18 +61,27 @@ export default class NewBill {
       fileName: this.fileName,
       status: 'pending'
     }
+    
     this.updateBill(bill)
-    this.onNavigate(ROUTES_PATH['Bills'])
+    this.onNavigate(ROUTES_PATH['Bills'])   
+  }
+
+  isExtensionAvailable = (fileExtension) => {
+    const availableExtensions = ['jpg', 'jpeg', 'png']
+    if (!availableExtensions.includes(fileExtension)) return false
+    return true
   }
 
   // not need to cover this function by tests
   updateBill = (bill) => {
     if (this.store) {
+      console.log(this.store)
       this.store
       .bills()
       .update({data: JSON.stringify(bill), selector: this.billId})
       .then(() => {
         this.onNavigate(ROUTES_PATH['Bills'])
+        
       })
       .catch(error => console.error(error))
     }

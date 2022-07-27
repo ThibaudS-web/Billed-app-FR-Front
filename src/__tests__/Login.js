@@ -169,6 +169,7 @@ describe("Given that I am a user on login page", () => {
       };
 
       const inputEmailUser = screen.getByTestId("admin-email-input");
+    
       fireEvent.change(inputEmailUser, { target: { value: inputData.email } });
       expect(inputEmailUser.value).toBe(inputData.email);
 
