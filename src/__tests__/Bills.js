@@ -119,7 +119,7 @@ describe("Bills Unit Test Suites", () => {
     const billsContainer = new Bills({
       document, onNavigate, store, localStorage: window.localStorage
     })
-
+    
     expect(await billsContainer.getBills()).toBeDefined()
   })
 })

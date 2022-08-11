@@ -77,7 +77,6 @@ describe("Given I am connected as an employee and I am on NewBill Page", () => {
       const newBillcontainer = new NewBill({ document, onNavigate, store, localStorage })
       const handleSubmit = jest.fn(newBillcontainer.handleSubmit)
       const buttonNewBill = document.getElementById("btn-send-bill")
-      //ajouter attr testid sur le button
       buttonNewBill.addEventListener("click", (e) => handleSubmit)
       fireEvent.click(buttonNewBill)
       expect(window.location.href).toContain('#employee/bill/new')
